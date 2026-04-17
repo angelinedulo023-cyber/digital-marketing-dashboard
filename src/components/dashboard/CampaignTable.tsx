@@ -1,9 +1,4 @@
-const campaigns = [
-  { name: "Spring Launch", channel: "Email", budget: "$18.4k", leads: 320, status: "Active" },
-  { name: "SEO Refresh", channel: "Organic", budget: "$9.2k", leads: 140, status: "Active" },
-  { name: "Paid Search", channel: "PPC", budget: "$13.8k", leads: 220, status: "Paused" },
-  { name: "Social Promo", channel: "Social", budget: "$7.1k", leads: 110, status: "Active" },
-];
+import { campaigns } from "@/lib/analytics";
 
 export function CampaignTable() {
   return (
@@ -18,8 +13,9 @@ export function CampaignTable() {
             <tr>
               <th className="px-6 py-4 font-semibold">Campaign</th>
               <th className="px-6 py-4 font-semibold">Channel</th>
-              <th className="px-6 py-4 font-semibold">Budget</th>
+              <th className="px-6 py-4 font-semibold">Spend</th>
               <th className="px-6 py-4 font-semibold">Leads</th>
+              <th className="px-6 py-4 font-semibold">ROI</th>
               <th className="px-6 py-4 font-semibold">Status</th>
             </tr>
           </thead>
@@ -28,8 +24,9 @@ export function CampaignTable() {
               <tr key={campaign.name} className="border-t border-slate-200/80 hover:bg-slate-50">
                 <td className="px-6 py-4 text-slate-900">{campaign.name}</td>
                 <td className="px-6 py-4 text-slate-600">{campaign.channel}</td>
-                <td className="px-6 py-4 text-slate-900">{campaign.budget}</td>
+                <td className="px-6 py-4 text-slate-900">{campaign.spend}</td>
                 <td className="px-6 py-4 text-slate-900">{campaign.leads}</td>
+                <td className="px-6 py-4 text-slate-900">{campaign.roi}</td>
                 <td className={`px-6 py-4 font-semibold ${campaign.status === "Active" ? "text-emerald-700" : "text-amber-600"}`}>
                   {campaign.status}
                 </td>

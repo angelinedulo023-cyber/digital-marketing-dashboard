@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Digital Marketing Dashboard",
   description: "Marketing analytics dashboard with authentication and reporting.",
+  viewport: "width=device-width, initial-scale=1.0",
 };
 
 export default function RootLayout({

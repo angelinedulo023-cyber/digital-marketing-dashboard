@@ -1,11 +1,11 @@
 import Link from "next/link";
 
 const navItems = [
-  { label: "Overview", href: "#" },
+  { label: "Dashboard", href: "/" },
+  { label: "Scheduling", href: "/scheduling" },
   { label: "Campaigns", href: "#campaigns" },
   { label: "Analytics", href: "#analytics" },
   { label: "Reports", href: "#reports" },
-  { label: "Settings", href: "#settings" },
 ];
 
 export function Sidebar() {

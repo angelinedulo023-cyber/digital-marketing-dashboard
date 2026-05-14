@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { CustomerManagement } from "@/components/crm/CustomerManagement";
 import { Sidebar } from "@/components/navigation/Sidebar";
+import { MobileSidebar } from "@/components/navigation/MobileSidebar";
 import { TopNav } from "@/components/navigation/TopNav";
 
 export default async function CrmPage() {
@@ -15,17 +16,20 @@ export default async function CrmPage() {
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900">
       <TopNav />
-      <div className="mx-auto grid max-w-7xl gap-6 px-4 pb-6 pt-6 lg:grid-cols-[280px_minmax(0,1fr)]">
+      <MobileSidebar />
+      <div className="mx-auto grid max-w-7xl gap-4 px-4 pb-6 pt-4 lg:gap-6 lg:px-6 lg:pt-6 lg:grid-cols-[280px_minmax(0,1fr)]">
+        {/* Desktop Sidebar - hidden on mobile */}
         <aside className="hidden lg:block">
           <Sidebar />
         </aside>
 
-        <main className="flex min-h-[calc(100vh-5.5rem)] flex-col overflow-hidden rounded-[2rem] border border-slate-200/70 bg-white shadow-sm shadow-slate-200/30">
-          <div className="rounded-[2rem] bg-slate-50 p-6 sm:p-8">
+        {/* Main Content */}
+        <main className="flex min-h-[calc(100vh-5.5rem)] flex-col overflow-hidden rounded-2xl border border-slate-200/70 bg-white shadow-sm shadow-slate-200/30 lg:rounded-[2rem]">
+          <div className="rounded-2xl bg-slate-50 p-4 sm:p-6 lg:rounded-[2rem] lg:p-8">
             <div>
-              <p className="text-sm uppercase tracking-[0.28em] text-sky-500">Customer relationship management</p>
-              <h1 className="mt-4 text-4xl font-semibold leading-tight text-slate-950">Manage your customers</h1>
-              <p className="mt-3 max-w-2xl text-slate-600">Store customer details, view interactions, and keep feedback in one place.</p>
+              <p className="text-xs uppercase tracking-wider text-sky-500 sm:text-sm sm:tracking-[0.28em]">Customer relationship management</p>
+              <h1 className="mt-2 text-2xl font-semibold leading-tight text-slate-950 sm:text-3xl lg:text-4xl">Manage your customers</h1>
+              <p className="mt-2 max-w-2xl text-xs text-slate-600 sm:text-sm">Store customer details, view interactions, and keep feedback in one place.</p>
             </div>
           </div>
 

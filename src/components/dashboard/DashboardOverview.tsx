@@ -56,46 +56,50 @@ export function DashboardOverview() {
   ];
 
   return (
-    <div className="space-y-6">
-      <div className="grid gap-6 xl:grid-cols-[repeat(4,minmax(0,1fr))]">
+    <div className="space-y-4 sm:space-y-6">
+      {/* Metrics Cards - Mobile First */}
+      <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-6">
         {cards.map((card) => (
-          <div key={card.title} className="rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm shadow-slate-200/20">
-            <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">{card.title}</h3>
-            <p className="mt-3 text-3xl font-semibold text-slate-950">{card.value}</p>
-            <p className="mt-4 text-sm text-slate-600">{card.description}</p>
+          <div key={card.title} className="rounded-lg sm:rounded-2xl border border-slate-200/70 bg-white p-4 sm:p-6 shadow-sm shadow-slate-200/20 touch-none hover:shadow-md transition">
+            <h3 className="text-xs font-semibold uppercase tracking-wider sm:tracking-[0.18em] text-slate-500 sm:text-sm">{card.title}</h3>
+            <p className="mt-2 text-2xl font-semibold text-slate-950 sm:text-3xl">{card.value}</p>
+            <p className="mt-3 text-xs text-slate-600 sm:text-sm leading-relaxed">{card.description}</p>
           </div>
         ))}
       </div>
 
-      <div className="grid gap-6 xl:grid-cols-[2fr_1fr]">
-        <div className="rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm shadow-slate-200/20">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-xl font-semibold text-slate-950">Recent activity</h2>
-              <p className="mt-2 text-sm text-slate-600">Latest system events and marketing actions.</p>
+      {/* Activity and Summary - Stacked on mobile */}
+      <div className="grid gap-3 lg:gap-6 lg:grid-cols-[2fr_1fr] sm:gap-4">
+        {/* Recent Activity */}
+        <div className="rounded-lg sm:rounded-2xl border border-slate-200/70 bg-white p-4 sm:p-6 shadow-sm shadow-slate-200/20">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <div className="min-w-0">
+              <h2 className="text-lg font-semibold text-slate-950 sm:text-xl">Recent activity</h2>
+              <p className="mt-1 text-xs text-slate-600 sm:text-sm">Latest system events and marketing actions.</p>
             </div>
           </div>
-          <div className="mt-6 space-y-4">
+          <div className="mt-4 sm:mt-6 space-y-2 sm:space-y-4">
             {activities.map((activity) => (
-              <div key={activity.id} className="rounded-3xl bg-slate-50 p-4">
-                <p className="text-sm text-slate-900">{activity.message}</p>
-                <p className="mt-2 text-xs text-slate-500">{activity.time}</p>
+              <div key={activity.id} className="rounded-lg bg-slate-50 p-3 sm:p-4">
+                <p className="text-xs text-slate-900 sm:text-sm">{activity.message}</p>
+                <p className="mt-1 text-xs text-slate-500 sm:text-xs">{activity.time}</p>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm shadow-slate-200/20">
-          <h2 className="text-xl font-semibold text-slate-950">Customer summary</h2>
-          <p className="mt-2 text-sm text-slate-600">Quick view of your customer base and buying behavior.</p>
-          <div className="mt-6 space-y-4 text-sm text-slate-600">
-            <div className="rounded-3xl bg-slate-50 p-4">
-              <p className="font-semibold text-slate-950">Customers</p>
-              <p className="mt-2">{customers.length} total registered customers</p>
+        {/* Customer Summary */}
+        <div className="rounded-lg sm:rounded-2xl border border-slate-200/70 bg-white p-4 sm:p-6 shadow-sm shadow-slate-200/20">
+          <h2 className="text-lg font-semibold text-slate-950 sm:text-xl">Customer summary</h2>
+          <p className="mt-1 text-xs text-slate-600 sm:text-sm">Quick view of your customer base and buying behavior.</p>
+          <div className="mt-4 sm:mt-6 space-y-3 sm:space-y-4 text-sm text-slate-600">
+            <div className="rounded-lg bg-slate-50 p-3 sm:p-4">
+              <p className="font-semibold text-slate-950 text-xs sm:text-sm">Customers</p>
+              <p className="mt-2 text-xs text-slate-600 sm:text-sm">{customers.length} total registered customers</p>
             </div>
-            <div className="rounded-3xl bg-slate-50 p-4">
-              <p className="font-semibold text-slate-950">Campaigns</p>
-              <p className="mt-2">{campaigns.length} campaigns created</p>
+            <div className="rounded-lg bg-slate-50 p-3 sm:p-4">
+              <p className="font-semibold text-slate-950 text-xs sm:text-sm">Campaigns</p>
+              <p className="mt-2 text-xs text-slate-600 sm:text-sm">{campaigns.length} campaigns created</p>
             </div>
           </div>
         </div>

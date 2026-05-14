@@ -1,6 +1,15 @@
-import { scheduledPosts } from "@/lib/scheduling";
+interface ScheduledPostsListProps {
+  posts: Array<{
+    id: string;
+    content: string;
+    channel: string;
+    scheduledDate: string;
+    scheduledTime: string;
+    status: string;
+  }>;
+}
 
-export function ScheduledPostsList() {
+export function ScheduledPostsList({ posts }: ScheduledPostsListProps) {
   return (
     <div className="rounded-3xl border border-slate-200/70 bg-white shadow-sm shadow-slate-200/20">
       <div className="border-b border-slate-200/80 p-6">
@@ -18,10 +27,10 @@ export function ScheduledPostsList() {
             </tr>
           </thead>
           <tbody>
-            {scheduledPosts.map((post) => (
+            {posts.map((post) => (
               <tr key={post.id} className="border-t border-slate-200/80 hover:bg-slate-50">
-                <td className="px-6 py-4 text-slate-900">
-                  <p className="line-clamp-2 max-w-xs">{post.content}</p>
+                <td className="px-6 py-4 text-slate-900 max-w-xs overflow-hidden text-ellipsis whitespace-nowrap">
+                  {post.content}
                 </td>
                 <td className="px-6 py-4 text-slate-600">{post.channel}</td>
                 <td className="px-6 py-4 text-slate-900">

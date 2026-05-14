@@ -1,10 +1,10 @@
-import { AnalyticsCard } from "@/components/dashboard/AnalyticsCard";
 import { CampaignTable } from "@/components/dashboard/CampaignTable";
+import { DashboardOverview } from "@/components/dashboard/DashboardOverview";
 import { RevenueChart } from "@/components/dashboard/RevenueChart";
 import { Sidebar } from "@/components/navigation/Sidebar";
 import { TopNav } from "@/components/navigation/TopNav";
 import { TrafficChart } from "@/components/dashboard/TrafficChart";
-import { analyticsCards, performanceHighlights } from "@/lib/analytics";
+import { performanceHighlights } from "@/lib/analytics";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
@@ -40,13 +40,7 @@ export default async function Home() {
           </div>
 
           <div className="flex-1 overflow-y-auto px-4 pb-6 sm:px-6 lg:px-8" style={{ maxHeight: "calc(100vh - 10.5rem)" }}>
-            <section className="grid gap-6 xl:grid-cols-[repeat(4,minmax(0,1fr))]">
-              {analyticsCards.map((card) => (
-                <AnalyticsCard key={card.title} title={card.title} value={card.value} delta={card.delta}>
-                  {card.description}
-                </AnalyticsCard>
-              ))}
-            </section>
+            <DashboardOverview />
 
             <section id="analytics" className="grid gap-6 lg:grid-cols-[1.3fr_0.7fr]">
               <TrafficChart />

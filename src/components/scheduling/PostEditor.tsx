@@ -2,7 +2,11 @@
 
 import { useState } from "react";
 
-export function PostEditor() {
+interface PostEditorProps {
+  onSave: (post: any, activity: any) => void;
+}
+
+export function PostEditor({ onSave }: PostEditorProps) {
   const [content, setContent] = useState("");
   const [scheduledDate, setScheduledDate] = useState("");
   const [scheduledTime, setScheduledTime] = useState("");
@@ -21,6 +25,31 @@ export function PostEditor() {
     }
   };
 
+  const clearForm = () => {
+    setContent("");
+    setScheduledDate("");
+    setScheduledTime("");
+    setImageFile(null);
+    setImagePreview(null);
+  };
+
+  const createPost = (status: string) => {
+    return {
+      id: `post-${Date.now()}`,
+      content,
+      scheduledDate: scheduledDate || new Date().toISOString().slice(0, 10),
+      scheduledTime: scheduledTime || new Date().toLocaleTimeString("en-US", { hour12: false }).slice(0, 5),
+      channel: status === "Published" ? "General" : "Scheduled",
+      status,
+    };
+  };
+
+  const createActivity = (action: string) => ({
+    id: `activity-${Date.now()}`,
+    message: `${action} post: ${content.slice(0, 50)}${content.length > 50 ? "..." : ""}`,
+    time: "Just now",
+  });
+
   const handleSchedule = () => {
     if (!content.trim()) {
       alert("Please enter post content");
@@ -30,13 +59,12 @@ export function PostEditor() {
       alert("Please select a date and time");
       return;
     }
-    console.log({
-      content,
-      scheduledDate,
-      scheduledTime,
-      imageFile: imageFile?.name || "no image",
-    });
+
+    const post = createPost("Scheduled");
+    const activity = createActivity("Scheduled");
+    onSave(post, activity);
     alert(`Post scheduled for ${scheduledDate} at ${scheduledTime}`);
+    clearForm();
   };
 
   const handlePublishNow = () => {
@@ -44,8 +72,12 @@ export function PostEditor() {
       alert("Please enter post content");
       return;
     }
-    console.log({ content, imageFile: imageFile?.name || "no image" });
+
+    const post = createPost("Published");
+    const activity = createActivity("Published");
+    onSave(post, activity);
     alert("Post published immediately");
+    clearForm();
   };
 
   return (
@@ -56,7 +88,6 @@ export function PostEditor() {
       </div>
 
       <div className="space-y-6">
-        {/* Content Editor */}
         <div>
           <label className="block text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
             Post content
@@ -71,7 +102,6 @@ export function PostEditor() {
           <p className="mt-2 text-xs text-slate-500">{content.length} characters</p>
         </div>
 
-        {/* Image Upload */}
         <div>
           <label className="block text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
             Attach image
@@ -98,7 +128,6 @@ export function PostEditor() {
           )}
         </div>
 
-        {/* Date and Time */}
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label className="block text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
@@ -124,7 +153,6 @@ export function PostEditor() {
           </div>
         </div>
 
-        {/* Action Buttons */}
         <div className="flex gap-3 pt-4">
           <button
             onClick={handlePublishNow}

@@ -20,6 +20,7 @@ export default async function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-slate-100 text-slate-900">
       <TopNav />
+      <MobileSidebar />
       <div className="flex-1 overflow-y-auto">
         <div className="mx-auto grid max-w-7xl gap-4 px-4 pb-6 pt-4 lg:gap-6 lg:px-6 lg:pt-6 lg:grid-cols-[280px_minmax(0,1fr)]">
           {/* Desktop Sidebar - hidden on mobile */}

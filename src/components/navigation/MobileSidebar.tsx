@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
 
 const navItems = [
   { label: "Dashboard", href: "/" },
@@ -29,9 +28,9 @@ export function MobileSidebar() {
         aria-expanded={isOpen}
       >
         {isOpen ? (
-          <X className="h-6 w-6" />
+          <span className="text-2xl">✕</span>
         ) : (
-          <Menu className="h-6 w-6" />
+          <span className="text-2xl">☰</span>
         )}
       </button>
 
@@ -64,7 +63,7 @@ export function MobileSidebar() {
             onClick={closeSidebar}
             className="h-touch w-touch flex items-center justify-center rounded-lg text-slate-700 hover:bg-slate-100 transition"
           >
-            <X className="h-5 w-5" />
+            <span className="text-2xl">✕</span>
           </button>
         </div>
 

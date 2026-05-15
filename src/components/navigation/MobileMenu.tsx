@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Dashboard", href: "/" },
@@ -28,9 +27,9 @@ export function MobileMenu() {
         aria-expanded={isOpen}
       >
         {isOpen ? (
-          <X className="h-6 w-6" />
+          <span className="text-2xl">✕</span>
         ) : (
-          <Menu className="h-6 w-6" />
+          <span className="text-2xl">☰</span>
         )}
       </button>
 
@@ -58,6 +57,15 @@ export function MobileMenu() {
             >
               {item.label}
             </Link>
+          ))}
+          <button className="w-full mt-2 rounded-lg bg-sky-500 px-4 py-3 text-sm font-medium text-white hover:bg-sky-600 transition active:bg-sky-700">
+            Create report
+          </button>
+        </div>
+      </nav>
+    </>
+  );
+}
           ))}
           <button className="w-full mt-2 rounded-lg bg-sky-500 px-4 py-3 text-sm font-medium text-white hover:bg-sky-600 transition active:bg-sky-700">
             Create report
